@@ -31,7 +31,8 @@ def generate_pdf3(data):
     pdf.set_line_width(.8)
     pdf.line(7, 0, 7, 500)
 
-    pdf.image('circle.png', 175, 10, 25)
+
+    pdf.image(data['logo_loc'], 175, 10, 25)
     pdf.image('NIET New Logo Engineering.png',12,15,35)
 
     pdf.add_text("To", 'b')

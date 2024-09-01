@@ -41,7 +41,7 @@ st.markdown("""
 # Function for "Request for attendance for the Event" page
 def attendance_request():
     st.title("Request for Attendance for the Event")
-    
+    club=st.selectbox("Club",options=["Megapixel","HID Club","Green Golden Society"])    
     to_line_1 = st.text_input("To Line 1")
     to_line_2 = st.text_input("To Line 2")
     respected = st.text_input("Respected")
@@ -52,6 +52,13 @@ def attendance_request():
     location = st.text_input("Event Location")
     sincerely = st.text_input("Sincerely")
     sincerely_post = st.text_input("Sincerely Post")
+
+    if club=="Megapixel":
+        logo_loc="megapixel.png"
+    elif club=="HID Club":
+        logo_loc="HID.png"
+    elif club=="Green Golden Society":
+        logo_loc="GGC.png"
 
     # Participants Form
     if 'participants' not in st.session_state:
@@ -89,7 +96,8 @@ def attendance_request():
             'location': location,
             'sincerely': sincerely,
             'sincerely_post': sincerely_post,
-            'participants': st.session_state.participants
+            'participants': st.session_state.participants,
+            'logo_loc': logo_loc
         }
         pdf_output = generate_pdf1(data)
         st.success("PDF generated successfully!")
@@ -103,7 +111,7 @@ def attendance_request():
 # Function for "Request for Approval to Print Standee Poster for Event" page
 def approval_request():
     st.title("Request for Approval to Print Standee Poster for Event")
-    
+    club=st.selectbox("Club",options=["Megapixel","HID Club","Green Golden Society"])    
     to_line_1 = st.text_input("To Line 1")
     to_line_2 = st.text_input("To Line 2")
     respected = st.text_input("Respected")
@@ -113,6 +121,13 @@ def approval_request():
     purpose = st.text_area("Purpose of Printing")
     sincerely = st.text_input("Sincerely")
     sincerely_post = st.text_input("Sincerely Post")
+
+    if club=="Megapixel":
+        logo_loc="megapixel.png"
+    elif club=="HID Club":
+        logo_loc="HID.png"
+    elif club=="Green Golden Society":
+        logo_loc="GGC.png"
 
     if st.button("Generate PDF"):
         data = {
@@ -126,6 +141,7 @@ def approval_request():
             'purpose': purpose,
             'sincerely': sincerely,
             'sincerely_post': sincerely_post,
+            'logo_loc': logo_loc
         }
         pdf_output = generate_pdf2(data)
         st.success("PDF generated successfully!")
@@ -139,7 +155,7 @@ def approval_request():
 # Function for "Request for the requirements for Event" page
 def requirements_request():
     st.title("Request for the Requirements for Event")
-    
+    club=st.selectbox("Club",options=["Megapixel","HID Club","Green Golden Society"])    
     to_line_1 = st.text_input("To Line 1")
     to_line_2 = st.text_input("To Line 2")
     respected = st.text_input("Respected")
@@ -149,6 +165,13 @@ def requirements_request():
     end_time = st.time_input("Event End Time")
     sincerely = st.text_input("Sincerely")
     sincerely_post = st.text_input("Sincerely Post")
+
+    if club=="Megapixel":
+        logo_loc="megapixel.png"
+    elif club=="HID Club":
+        logo_loc="HID.png"
+    elif club=="Green Golden Society":
+        logo_loc="GGC.png"
 
     
     # Requirements Form
@@ -184,7 +207,8 @@ def requirements_request():
             'end_time': end_time.strftime('%H:%M'),
             'requirements': st.session_state.requirements,
             'sincerely': sincerely,
-            'sincerely_post': sincerely_post
+            'sincerely_post': sincerely_post,
+            'logo_loc': logo_loc
         }
         pdf_output = generate_pdf3(data)
         st.success("PDF generated successfully!")
