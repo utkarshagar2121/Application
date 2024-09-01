@@ -1,3 +1,6 @@
+#/c/Users/utkar/AppData/Local/Microsoft/WindowsApps/python -m streamlit run streamlit_app.py
+
+
 import streamlit as st
 from pdf_creator1 import generate_pdf1
 from pdf_creator2 import generate_pdf2
@@ -33,6 +36,13 @@ def intro():
         - We will soon be adding Data Analysis and Visualization features to the app.Through data analysis, we can Automate the process of Data and Information
         - If you have any suggestions or feedback, feel free to reach out to us.
             📨 utkarshagar21@gmail.com
+
+        ### About the Developer:
+        - **Name**: Utkarsh Agarwal
+        - **LinkedIn**: [Utkarsh Agarwal](https://www.linkedin.com/in/utkarsh-agarwal-1b359922b/)
+
+        - **Name**: Shubhankar Nath
+        - **LinkedIn**:[Shubhankar Nath](https://www.linkedin.com/in/shubhankar-nath-ab8549265/)
     """
     )
 
