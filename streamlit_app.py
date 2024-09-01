@@ -4,54 +4,53 @@ from pdf_creator2 import generate_pdf2
 from pdf_creator3 import generate_pdf3
 from io import BytesIO
 
-# Inject custom CSS
-st.markdown("""
-    <style>
-    /* Body background color */
-    .reportview-container {
-        background-color: #f5f5f5;
-    }
-    /* Sidebar background color */
-    .sidebar .sidebar-content {
-        background-color: #ffffff;
-    }
-    /* Title font color */
-    .css-1d391kg {
-        color: #007bff;
-    }
-    /* Subtitle font color */
-    .css-1v0mbdj {
-        color: #333;
-    }
-    /* Button style */
-    .stButton>button {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        padding: 10px 20px;
-        font-size: 16px;
-    }
-    .stButton>button:hover {
-        background-color: #0056b3;
-    }
-    </style>
-""", unsafe_allow_html=True)
+def intro():
+    import streamlit as st
+
+    st.write("# Welcome to Application Maker! 👋")
+    st.sidebar.success("Select an Application Type above.")
+
+    st.markdown(
+        """
+
+        **👈 Select a Application Type from the dropdown on the left**
+
+        ### What this app do?
+
+        - This app generates PDFs for different types of applications.
+        - You can select the type of application you want to generate from the dropdown on the left.
+        - Fill the form and click on the "Generate PDF" button to get the PDF.
+        - Click on the "Download PDF" button to download the PDF.
+        - You can also add multiple participants or requirements in the form.
+        - The PDF will be generated with the details you have filled in the form.
+        - You can generate PDFs for the following types of applications:
+            - Request for Attendance for the Event 
+            - Request for Approval to Print Standee Poster for Event
+            - Request for the requirements for Event
+
+        ### Future Scope:
+        - We will be adding more types of applications in the future.
+        - We will soon be adding Data Analysis and Visualization features to the app.Through data analysis, we can Automate the process of Data and Information
+        - If you have any suggestions or feedback, feel free to reach out to us.
+            📨 utkarshagar21@gmail.com
+    """
+    )
+
 
 # Function for "Request for attendance for the Event" page
 def attendance_request():
     st.title("Request for Attendance for the Event")
-    club=st.selectbox("Club",options=["Megapixel","HID Club","Green Golden Society"])    
-    to_line_1 = st.text_input("To Line 1")
-    to_line_2 = st.text_input("To Line 2")
-    respected = st.text_input("Respected")
-    event_name = st.text_input("Event Name")
-    event_date = st.date_input("Event Date")
-    start_time = st.time_input("Event Start Time")
-    end_time = st.time_input("Event End Time")
-    location = st.text_input("Event Location")
-    sincerely = st.text_input("Sincerely")
-    sincerely_post = st.text_input("Sincerely Post")
+    club=st.selectbox("Club",options=["Megapixel","HID Club","Green Golden Society"],index=None,placeholder="Select Club")    
+    to_line_1 = st.text_input("Reciepient Designation",placeholder="Reciepient Designation")
+    to_line_2 = st.text_input("Reciepient Address",value="NIET")
+    respected = st.text_input("Greetings",placeholder="Respected sir/madam")
+    event_name = st.text_input("Event Name",placeholder="Event Name")
+    event_date = st.date_input("Event Date",value=None)
+    start_time = st.time_input("Event Start Time",value=None)
+    end_time = st.time_input("Event End Time",value=None)
+    location = st.text_input("Event Location",placeholder="Event Location")
+    sincerely = st.text_input("Sender's Name")
+    sincerely_post = st.text_input("Sender's Designation")
 
     if club=="Megapixel":
         logo_loc="megapixel.png"
@@ -63,12 +62,13 @@ def attendance_request():
     # Participants Form
     if 'participants' not in st.session_state:
         st.session_state.participants = []
-        
+    st.markdown("### Participants")
     with st.form(key='participant_form', clear_on_submit=True):
-        st.write("Add Participants")
-        name = st.text_input("Name")
-        branch = st.text_input("Branch")
-        roll_number = st.text_input("Roll Number")
+        st.markdown("Fill the details of the participants below:")
+        name = st.text_input("Name",placeholder="Name")
+        branch = st.text_input("Branch",placeholder="Branch")
+        roll_number = st.text_input("Roll Number",placeholder="Roll Number")
+        st.markdown("""👇Click on the button to add Participant""")
         add_participant_button = st.form_submit_button("Add Participant")
         
         if add_participant_button and name and branch and roll_number:
@@ -111,16 +111,15 @@ def attendance_request():
 # Function for "Request for Approval to Print Standee Poster for Event" page
 def approval_request():
     st.title("Request for Approval to Print Standee Poster for Event")
-    club=st.selectbox("Club",options=["Megapixel","HID Club","Green Golden Society"])    
-    to_line_1 = st.text_input("To Line 1")
-    to_line_2 = st.text_input("To Line 2")
-    respected = st.text_input("Respected")
-    event_name = st.text_input("Event Name")
-    poster_size = st.selectbox("Poster Size", options=["2x3 feet", "3x4 feet", "4x5 feet"])
-    quantity = st.number_input("Number of Posters", min_value=1, max_value=100, value=1, step=1)
-    purpose = st.text_area("Purpose of Printing")
-    sincerely = st.text_input("Sincerely")
-    sincerely_post = st.text_input("Sincerely Post")
+    club=st.selectbox("Club",options=["Megapixel","HID Club","Green Golden Society"],index=None,placeholder="Select Club")    
+    to_line_1 = st.text_input("Reciepient Designation",placeholder="Reciepient Designation")
+    to_line_2 = st.text_input("Reciepient Address",value="NIET")
+    respected = st.text_input("Greetings",placeholder="Respected sir/madam")
+    event_name = st.text_input("Event Name",placeholder="Event Name")
+    poster_size = st.selectbox("Poster Size", options=["2x3 feet", "3x4 feet", "4x5 feet"],index=None,placeholder="Select Poster Size")
+    quantity = st.number_input("Number of Posters", min_value=1, max_value=100, value=1, step=1, format="%d")
+    sincerely = st.text_input("Sender's Name")
+    sincerely_post = st.text_input("Sender's Designation")
 
     if club=="Megapixel":
         logo_loc="megapixel.png"
@@ -138,7 +137,6 @@ def approval_request():
             'event_name': event_name,
             'poster_size': poster_size,
             'quantity': quantity,
-            'purpose': purpose,
             'sincerely': sincerely,
             'sincerely_post': sincerely_post,
             'logo_loc': logo_loc
@@ -155,16 +153,16 @@ def approval_request():
 # Function for "Request for the requirements for Event" page
 def requirements_request():
     st.title("Request for the Requirements for Event")
-    club=st.selectbox("Club",options=["Megapixel","HID Club","Green Golden Society"])    
-    to_line_1 = st.text_input("To Line 1")
-    to_line_2 = st.text_input("To Line 2")
-    respected = st.text_input("Respected")
-    event_name = st.text_input("Event Name")
-    event_date = st.date_input("Event Date")
-    start_time = st.time_input("Event Start Time")
-    end_time = st.time_input("Event End Time")
-    sincerely = st.text_input("Sincerely")
-    sincerely_post = st.text_input("Sincerely Post")
+    club=st.selectbox("Club",options=["Megapixel","HID Club","Green Golden Society"],index=None,placeholder="Select Club")    
+    to_line_1 = st.text_input("Reciepient Designation",placeholder="Reciepient Designation")
+    to_line_2 = st.text_input("Reciepient Address",value="NIET")
+    respected = st.text_input("Greetings",placeholder="Respected sir/madam")
+    event_name = st.text_input("Event Name",placeholder="Event Name")
+    event_date = st.date_input("Event Date",value=None)
+    start_time = st.time_input("Event Start Time",value=None)
+    end_time = st.time_input("Event End Time",value=None)
+    sincerely = st.text_input("Sender's Name")
+    sincerely_post = st.text_input("Sender's Designation")
 
     if club=="Megapixel":
         logo_loc="megapixel.png"
@@ -219,20 +217,31 @@ def requirements_request():
             mime="application/pdf"
         )
 
-st.sidebar.title("PDF Generator")
-page = st.sidebar.selectbox(
-    "Choose a subject:",
-    options=[
-        "Request for attendance for the Event",
-        "Request for Approval to Print Standee Poster for Event",
-        "Request for the requirements for Event"
-    ]
-)
+st.sidebar.title("Application Generator")
+# page = st.sidebar.selectbox(
+#     "Choose a subject:",
+#     options=[
+#         "Attendence Application",
+#         "Poster Request for Standie",
+#         "Requirement Request for Event"
+#     ]
+# )
 
-# Page selection based on the user's choice
-if page == "Request for attendance for the Event":
-    attendance_request()
-elif page == "Request for Approval to Print Standee Poster for Event":
-    approval_request()
-elif page == "Request for the requirements for Event":
-    requirements_request()
+page_names_to_funcs = {
+    "—": intro,
+    "Attendence Application": attendance_request,
+    "Poster Request for Standie": approval_request,
+    "Requirement Request for Event": requirements_request
+}
+
+page_name = st.sidebar.selectbox("Choose a type of Application", page_names_to_funcs.keys())
+page_names_to_funcs[page_name]()
+
+
+# # Page selection based on the user's choice
+# if page == "Attendence Application":
+#     attendance_request()
+# elif page == "Poster Request for Standie":
+#     approval_request()
+# elif page == "Requirement Request for Event":
+#     requirements_request()
