@@ -63,6 +63,6 @@ def generate_pdf3(data):
 
     # Save PDF to a BytesIO object
     pdf_output = BytesIO()
-    pdf_output.write(pdf.output(dest='S'),encode('latin1'))
+    pdf_output.write(pdf.output(dest='S'))
     pdf_output.seek(0)
     return pdf_output
