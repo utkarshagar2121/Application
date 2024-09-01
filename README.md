@@ -1,7 +1,5 @@
 # Application PDF Generator
 
-**👈 Select an Application Type from the dropdown on the left**
-
 ## What This App Does
 
 - This application generates PDFs for various types of applications.
